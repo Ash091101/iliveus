@@ -12,7 +12,7 @@
             text-align: center;
             margin: 0;
             padding: 0;
-            background: url('background.jpg') no-repeat center top fixed;
+            background: url('background.jpg') no-repeat center center fixed;
             background-size: cover;
             color: white;
             display: flex;
@@ -135,18 +135,20 @@
                 return;
             }
             
-            const apiUrl = `https://script.google.com/macros/s/AKfycbx2TIPwwZcvi7ImegpPwFS1eZf1PtzuO2V4g3OAXoqgIZEWwLWbBLz_p0ixHU0zHg/exec?word=${encodeURIComponent(word)}`;
+            const apiUrl = `https://script.google.com/macros/s/AKfycbxGmutkefwh4k5AuOPxRl3IX8au0UVgI6t2pwnC6A7wv7AFw4HnKjWO9V45IT4q3nZH/exec?word=${encodeURIComponent(word)}`;
 
             try {
                 const response = await fetch(apiUrl);
                 const data = await response.json();
                 
-                if (data.english || data.iliveus) {
-                    document.getElementById(resultId).innerText =
-                        inputId === 'englishInput' ? data.iliveus || "No translation found." : data.english || "No translation found.";
-                } else {
-                    document.getElementById(resultId).innerText = "No translation found.";
+                console.log("API Response:", data);
+                
+                let translation = "No translation found.";
+                if (data.english && data.iliveus) {
+                    translation = inputId === 'englishInput' ? data.iliveus : data.english;
                 }
+                
+                document.getElementById(resultId).innerText = translation;
             } catch (error) {
                 console.error("Error fetching translation:", error);
                 document.getElementById(resultId).innerText = "Error fetching translation.";
