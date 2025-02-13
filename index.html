@@ -139,8 +139,10 @@
 
             try {
                 const response = await fetch(apiUrl);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
                 const data = await response.json();
-                
                 console.log("API Response:", data);
                 
                 let translation = "No translation found.";
