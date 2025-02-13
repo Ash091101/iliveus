@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ILIVEUS</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400&display=swap');
+        
+        body {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            font-size: 6rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            text-transform: capitalize;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .translation-box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+            width: 350px;
+        }
+        input {
+            padding: 12px;
+            font-size: 18px;
+            border: 1px solid white;
+            border-radius: 8px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+        }
+        button {
+            padding: 12px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            background: #d63384;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+        button:hover {
+            background: #b62a72;
+        }
+        .result {
+            margin-top: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-family: 'Playfair Display', serif;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <h1>ILIVEUS</h1>
+    <div class="container">
+        <div class="translation-box">
+            <h2>English to Iliveus</h2>
+            <input type="text" id="englishInput" placeholder="Enter English word...">
+            <button onclick="translate('englishInput', 'englishResult')">Translate</button>
+            <div class="result" id="englishResult"></div>
+        </div>
+        <div class="translation-box">
+            <h2>Iliveus to English</h2>
+            <input type="text" id="iliveusInput" placeholder="Enter Iliveus word...">
+            <button onclick="translate('iliveusInput', 'iliveusResult')">Translate</button>
+            <div class="result" id="iliveusResult"></div>
+        </div>
+    </div>
+    
+    <script>
+        async function translate(inputId, resultId) {
+            const word = document.getElementById(inputId).value.trim();
+            if (!word) {
+                alert("Please enter a word!");
+                return;
+            }
+            
+            const apiUrl = `https://script.google.com/macros/s/AKfycbxhjI8JisiUwDWr__Xb9hD3wkbsuEK5-cklUaiqusi8aGF7kvv7nrDhcrOeQxrlYqQU/exec?word=${word}`;
+            
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                
+                if (data.english && data.iliveus) {
+                    document.getElementById(resultId).innerText =
+                        inputId === 'englishInput' ? data.iliveus : data.english;
+                } else {
+                    document.getElementById(resultId).innerText = "No translation found.";
+                }
+            } catch (error) {
+                console.error("Error fetching translation:", error);
+                document.getElementById(resultId).innerText = "Error fetching translation.";
+            }
+        }
+    </script>
+</body>
+</html>
