@@ -33,34 +33,47 @@
         }
         .container {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             align-items: center;
-            gap: 30px;
+            gap: 50px;
         }
         .translation-box {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.5);
-            width: 400px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.6);
+            width: 450px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
         }
         h2 {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: #ffcad4;
+            margin-bottom: 10px;
         }
-        input {
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 10px;
+            width: 100%;
+        }
+        textarea {
             padding: 14px;
-            font-size: 18px;
+            font-size: 16px;
             border: 1px solid white;
             border-radius: 8px;
             width: 100%;
             background: rgba(255, 255, 255, 0.9);
-            text-align: center;
             font-family: 'Poppins', sans-serif;
             color: #333;
+            height: 80px;
+            resize: none;
+            box-sizing: border-box;
         }
         button {
-            padding: 14px 28px;
+            padding: 12px;
             font-size: 18px;
             border: none;
             border-radius: 8px;
@@ -70,18 +83,26 @@
             font-weight: bold;
             transition: 0.3s;
             font-family: 'Poppins', sans-serif;
-            box-shadow: 2px 2px 10px rgba(255, 92, 138, 0.5);
+            width: 100%;
         }
         button:hover {
             background: #e04b79;
         }
         .result {
-            margin-top: 15px;
-            font-size: 1.6rem;
+            margin-top: 10px;
+            font-size: 1.4rem;
             font-weight: bold;
             font-family: 'Playfair Display', serif;
             color: white;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            width: 100%;
+            box-sizing: border-box;
         }
     </style>
 </head>
@@ -90,14 +111,18 @@
     <div class="container">
         <div class="translation-box">
             <h2>English to Iliveus</h2>
-            <input type="text" id="englishInput" placeholder="Enter English word...">
-            <button onclick="translate('englishInput', 'englishResult')">Translate</button>
+            <div class="input-container">
+                <textarea id="englishInput" placeholder="Enter English text..."></textarea>
+                <button onclick="translate('englishInput', 'englishResult')">Translate</button>
+            </div>
             <div class="result" id="englishResult"></div>
         </div>
         <div class="translation-box">
             <h2>Iliveus to English</h2>
-            <input type="text" id="iliveusInput" placeholder="Enter Iliveus word...">
-            <button onclick="translate('iliveusInput', 'iliveusResult')">Translate</button>
+            <div class="input-container">
+                <textarea id="iliveusInput" placeholder="Enter Iliveus text..."></textarea>
+                <button onclick="translate('iliveusInput', 'iliveusResult')">Translate</button>
+            </div>
             <div class="result" id="iliveusResult"></div>
         </div>
     </div>
@@ -106,7 +131,7 @@
         async function translate(inputId, resultId) {
             const word = document.getElementById(inputId).value.trim();
             if (!word) {
-                alert("Please enter a word!");
+                alert("Please enter text!");
                 return;
             }
             
