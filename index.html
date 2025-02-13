@@ -113,7 +113,7 @@
             <h2>English to Iliveus</h2>
             <div class="input-container">
                 <textarea id="englishInput" placeholder="Enter English text..."></textarea>
-                <button onclick="translate('englishInput', 'englishResult')">Translate</button>
+                <button onclick="translateText('englishInput', 'englishResult')">Translate</button>
             </div>
             <div class="result" id="englishResult"></div>
         </div>
@@ -121,14 +121,14 @@
             <h2>Iliveus to English</h2>
             <div class="input-container">
                 <textarea id="iliveusInput" placeholder="Enter Iliveus text..."></textarea>
-                <button onclick="translate('iliveusInput', 'iliveusResult')">Translate</button>
+                <button onclick="translateText('iliveusInput', 'iliveusResult')">Translate</button>
             </div>
             <div class="result" id="iliveusResult"></div>
         </div>
     </div>
     
     <script>
-        async function translate(inputId, resultId) {
+        async function translateText(inputId, resultId) {
             const word = document.getElementById(inputId).value.trim();
             if (!word) {
                 alert("Please enter text!");
@@ -138,7 +138,7 @@
             const apiUrl = `https://script.google.com/macros/s/AKfycbxGmutkefwh4k5AuOPxRl3IX8au0UVgI6t2pwnC6A7wv7AFw4HnKjWO9V45IT4q3nZH/exec?word=${encodeURIComponent(word)}`;
 
             try {
-                const response = await fetch(apiUrl);
+                const response = await fetch(apiUrl, { method: 'GET', mode: 'cors' });
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
