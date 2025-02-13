@@ -20,6 +20,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            backdrop-filter: brightness(0.7);
         }
         h1 {
             font-size: 6rem;
@@ -27,24 +28,28 @@
             font-weight: bold;
             text-transform: capitalize;
             color: white;
-            margin-bottom: 20px;
-            text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+            text-shadow: 4px 4px 12px rgba(0, 0, 0, 0.7);
         }
         .container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
+            gap: 30px;
         }
         .translation-box {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-            width: 350px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.5);
+            width: 400px;
+        }
+        h2 {
+            font-size: 1.8rem;
+            color: #ffcad4;
         }
         input {
-            padding: 12px;
+            padding: 14px;
             font-size: 18px;
             border: 1px solid white;
             border-radius: 8px;
@@ -55,27 +60,28 @@
             color: #333;
         }
         button {
-            padding: 12px 25px;
+            padding: 14px 28px;
             font-size: 18px;
             border: none;
             border-radius: 8px;
-            background: #d63384;
+            background: #ff5c8a;
             color: white;
             cursor: pointer;
             font-weight: bold;
             transition: 0.3s;
             font-family: 'Poppins', sans-serif;
+            box-shadow: 2px 2px 10px rgba(255, 92, 138, 0.5);
         }
         button:hover {
-            background: #b62a72;
+            background: #e04b79;
         }
         .result {
-            margin-top: 10px;
-            font-size: 1.5rem;
+            margin-top: 15px;
+            font-size: 1.6rem;
             font-weight: bold;
             font-family: 'Playfair Display', serif;
             color: white;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
         }
     </style>
 </head>
