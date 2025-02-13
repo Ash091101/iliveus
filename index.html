@@ -135,15 +135,15 @@
                 return;
             }
             
-            const apiUrl = `https://script.google.com/macros/s/AKfycbxhjI8JisiUwDWr__Xb9hD3wkbsuEK5-cklUaiqusi8aGF7kvv7nrDhcrOeQxrlYqQU/exec?word=${word}`;
-            
+            const apiUrl = `https://script.google.com/macros/s/AKfycbx2TIPwwZcvi7ImegpPwFS1eZf1PtzuO2V4g3OAXoqgIZEWwLWbBLz_p0ixHU0zHg/exec?word=${encodeURIComponent(word)}`;
+
             try {
                 const response = await fetch(apiUrl);
                 const data = await response.json();
                 
-                if (data.english && data.iliveus) {
+                if (data.english || data.iliveus) {
                     document.getElementById(resultId).innerText =
-                        inputId === 'englishInput' ? data.iliveus : data.english;
+                        inputId === 'englishInput' ? data.iliveus || "No translation found." : data.english || "No translation found.";
                 } else {
                     document.getElementById(resultId).innerText = "No translation found.";
                 }
